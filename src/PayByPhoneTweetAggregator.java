@@ -33,7 +33,7 @@ public class PayByPhoneTweetAggregator {
 
         List<Tweet> tweets = new ArrayList<Tweet>();
 
-        for(Status status : statuses)
+        for (Status status : statuses)
             tweets.add(new Tweet(status.text, status.createdAt));
 
         return tweets;

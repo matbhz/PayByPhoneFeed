@@ -2,7 +2,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.oauth.common.signature.SharedConsumerSecretImpl;
 import org.springframework.security.oauth.common.signature.SignatureSecret;
 import org.springframework.security.oauth.consumer.ProtectedResourceDetails;
-import org.springframework.security.oauth.consumer.client.OAuthRestTemplate;
 
 import java.util.Map;
 
