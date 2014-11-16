@@ -6,7 +6,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class User {
 
-    @JsonProperty(value = "name")
+    @JsonProperty(value = "screen_name")
     public String name;
 
     @JsonProperty(value = "id")

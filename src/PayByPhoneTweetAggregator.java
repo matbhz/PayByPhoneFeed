@@ -13,7 +13,7 @@ public class PayByPhoneTweetAggregator {
         for (Feed feed : feeds) {
 
             AggregatedTweet aggregatedTweet = new AggregatedTweet();
-            aggregatedTweet.setAccount(feed.statuses.get(0).user.name);
+            aggregatedTweet.setAccountName(feed.statuses.get(0).user.name);
             aggregatedTweet.setNumberOfTweets(feed.statuses.size());
             aggregatedTweet.setNumberOfUserMentions(retrieveNumberOfUserMentions(feed.statuses));
             aggregatedTweet.setTweets(readTweets(feed.statuses));
