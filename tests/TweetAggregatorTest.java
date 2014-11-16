@@ -17,7 +17,7 @@ public class TweetAggregatorTest {
     }
 
     @Test
-    public void shouldReturnAListWith3DifferentFeeds() {
+    public void shouldReturnAListWith3DifferentFeeds_when3ValidFeedsAreProvided() {
 
         Feed a = buildFeed("User A", "A1 tweet");
         Feed b = buildFeed("User B", "B1 tweet", "B2 tweet", "B3 tweet");
@@ -70,6 +70,22 @@ public class TweetAggregatorTest {
         List<AggregatedTweet> output = aggregator.mergeInformation();
 
         assertEquals(output.size(), 0);
+    }
+
+    @Test
+    public void shouldContainTheNumberOfMessages_whenFeedIsAggregated(){
+
+        Feed a = buildFeed("User A", "A1 tweet");
+        Feed b = buildFeed("User B", "B1 tweet", "B2 tweet", "B3 tweet");
+        Feed c = buildFeed("User C", "C1 tweet", "C2 tweet");
+
+        PayByPhoneTweetAggregator aggregator = new PayByPhoneTweetAggregator();
+        List<AggregatedTweet> output = aggregator.mergeInformation(a, b, c);
+
+        assertEquals(output.get(0).getTweets().size(), a.statuses.size());
+        assertEquals(output.get(1).getTweets().size(), b.statuses.size());
+        assertEquals(output.get(2).getTweets().size(), c.statuses.size());
+
     }
 
     // Builds a mock Feed (JSON) object
