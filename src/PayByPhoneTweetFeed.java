@@ -1,5 +1,4 @@
 import JsonToObjectMappings.Feed;
-import org.springframework.security.oauth.consumer.client.OAuthRestTemplate;
 import org.springframework.web.client.RestTemplate;
 
 import java.text.SimpleDateFormat;
@@ -7,7 +6,7 @@ import java.util.Calendar;
 
 public class PayByPhoneTweetFeed {
 
-    private static final String SEARCH_ENDPOINT = "https://api.twitter.com/1.1/search/tweets.json?q={query}";
+    private static final String SEARCH_ENDPOINT = "https://api.twitter.com/1.1/search/tweets.json?q={from} {since}";
 
     private Feed getLastTwoWeeksFeed(String query) {
         RestTemplate restTemplate = new TwitterOAuthRestTemplate(new TwitterOAuthCredentials());

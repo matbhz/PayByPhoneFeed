@@ -12,6 +12,9 @@ import java.net.URISyntaxException;
 import java.net.URLEncoder;
 
 public class TwitterOAuthRestTemplate extends OAuthRestTemplate {
+
+    private static final String BLANK_SPACE = "%20";
+
     public TwitterOAuthRestTemplate(ProtectedResourceDetails resource) {
         super(resource);
     }
@@ -26,17 +29,30 @@ public class TwitterOAuthRestTemplate extends OAuthRestTemplate {
         return doExecute(encodedUri, method, requestCallback, responseExtractor);
     }
 
-    // FIXME: Method to override URL encoding that Spring's OAuth does NOT do for colon queries, e.g. (from:abc since:2010-10-10)
-    private URI encodeUriVariables(URI expanded) {
+    // FIXME: Method to override the URL encoding that Spring's OAuth does NOT do for colon in queries, e.g. (from:abc since:2010-10-10)
+    private URI encodeUriVariables(URI uri) {
         try {
-            String endedUrl = expanded.toASCIIString().substring(0, 49) + URLEncoder.encode(expanded.toASCIIString().substring(49), "UTF-8");
-            return new URI(endedUrl);
+            String encodedUrl = uri.toASCIIString().substring(0, 49) + encodeQueryStringParameters(uri.toASCIIString().substring(49).split(BLANK_SPACE));
+            return new URI(encodedUrl);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    private String encodeQueryStringParameters(String... queryString) throws UnsupportedEncodingException {
+
+        StringBuffer output = new StringBuffer();
+
+        for (String param : queryString) {
+            output.append(URLEncoder.encode(param, "UTF-8"));
+            output.append(BLANK_SPACE);
+        }
+
+        return output.toString();
+
     }
 }
 
