@@ -1,17 +1,15 @@
 package JsonToObjectMappings;
 
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
-import java.util.Map;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Feed {
 
     @JsonProperty(value = "statuses")
     public List<Status> statuses;
-
-    @JsonProperty(value = "search_metadata")
-    public Map<String, String> searchMetadata;
 
 }
 
