@@ -14,7 +14,7 @@ public class PayByPhoneTweetFeed {
         return restTemplate.getForObject(SEARCH_ENDPOINT, Feed.class, query, "since:" + twoWeeksAgo());
     }
 
-    public Feed getPayByPhoneUkLastTwoWeeksFeed() {
+    public Feed getPayByPhone_UkLastTwoWeeksFeed() {
         return this.getLastTwoWeeksFeed("PayByPhone_UK");
     }
 
@@ -22,7 +22,7 @@ public class PayByPhoneTweetFeed {
         return this.getLastTwoWeeksFeed("PayByPhone");
     }
 
-    public Feed getPay_By_PhoneUkLastTwoWeeksFeed() {
+    public Feed getPay_By_PhoneLastTwoWeeksFeed() {
         return this.getLastTwoWeeksFeed("pay_by_phone");
     }
 

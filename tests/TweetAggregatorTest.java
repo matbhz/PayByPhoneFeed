@@ -73,7 +73,7 @@ public class TweetAggregatorTest {
     }
 
     @Test
-    public void shouldContainTheNumberOfMessages_whenFeedIsAggregated(){
+    public void shouldContainTheNumberOfMessages_whenFeedIsAggregated() {
 
         Feed a = buildFeed("User A", "A1 tweet");
         Feed b = buildFeed("User B", "B1 tweet", "B2 tweet", "B3 tweet");
