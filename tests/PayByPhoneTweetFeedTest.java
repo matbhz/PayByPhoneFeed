@@ -33,9 +33,9 @@ public class PayByPhoneTweetFeedTest {
     @Test
     public void shouldRetrieveAFeedForAccountPay_By_Phone() {
         PayByPhoneTweetFeed payByPhoneTweetFeed = new PayByPhoneTweetFeed();
-        Feed f = payByPhoneTweetFeed.getPayByPhoneLastTwoWeeksFeed();
+        Feed f = payByPhoneTweetFeed.getPay_By_PhoneLastTwoWeeksFeed();
 
         for (Status status : f.statuses)
-            assertEquals(status.user.name, "Pay_By_Phone");
+            assertEquals(status.user.name, "pay_by_phone");
     }
 }

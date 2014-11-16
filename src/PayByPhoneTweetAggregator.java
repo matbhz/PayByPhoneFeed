@@ -2,9 +2,12 @@ import JsonToObjectMappings.Feed;
 import JsonToObjectMappings.Status;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class PayByPhoneTweetAggregator {
+
+    private static final List<String> payByPhoneUsers = Arrays.asList("@PayByPhone", "@PayByPhone_UK", "@pay_by_phone");
 
     public List<AggregatedTweet> mergeInformation(Feed... feeds) {
 
@@ -41,7 +44,18 @@ public class PayByPhoneTweetAggregator {
     }
 
     private int retrieveNumberOfUserMentions(List<Status> statuses) {
-        return 0;
+
+        int numberOfMentions = 0;
+        for (Status status : statuses) {
+            for (String word : status.text.split(" ")) {
+                // If a word starts with '@' and it's not PayByPhone it means it's mentioned user. (Not an e-mail address)
+                if (!word.equals("") && word.charAt(0) == '@' && !payByPhoneUsers.contains(word)) {
+                    numberOfMentions++;
+                }
+            }
+        }
+
+        return numberOfMentions;
     }
 
 }
