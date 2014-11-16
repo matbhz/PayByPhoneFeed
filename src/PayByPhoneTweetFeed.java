@@ -10,20 +10,20 @@ public class PayByPhoneTweetFeed {
     private static final String SEARCH_ENDPOINT = "https://api.twitter.com/1.1/search/tweets.json?q={query}";
 
     private Feed getLastTwoWeeksFeed(String query) {
-        RestTemplate restTemplate = new OAuthRestTemplate(new TwitterOAuthCredentials());
+        RestTemplate restTemplate = new TwitterOAuthRestTemplate(new TwitterOAuthCredentials());
         return restTemplate.getForObject(SEARCH_ENDPOINT, Feed.class, query, "since:" + twoWeeksAgo());
     }
 
     public Feed getPayByPhone_UkLastTwoWeeksFeed() {
-        return this.getLastTwoWeeksFeed("PayByPhone_UK");
+        return this.getLastTwoWeeksFeed("from:PayByPhone_UK");
     }
 
     public Feed getPayByPhoneLastTwoWeeksFeed() {
-        return this.getLastTwoWeeksFeed("PayByPhone");
+        return this.getLastTwoWeeksFeed("from:PayByPhone");
     }
 
     public Feed getPay_By_PhoneLastTwoWeeksFeed() {
-        return this.getLastTwoWeeksFeed("pay_by_phone");
+        return this.getLastTwoWeeksFeed("from:pay_by_phone");
     }
 
     // Helper method
