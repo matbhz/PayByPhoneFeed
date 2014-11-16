@@ -7,20 +7,27 @@ import java.util.Calendar;
 
 public class PayByPhoneTweetFeed {
 
-    private final String SEARCH_ENDPOINT = "https://api.twitter.com/1.1/search/tweets.json?q={query}";
     // FIXME: Twitter API is behaving very oddly and not returning values most of the times
-    private final String SEARCH_ALL_CRITERIA = "from:pay_by_phone OR from:PayByPhone OR from:PayByPhone_UK";// since:" + twoWeeksAgo();
+    private final String SEARCH_ENDPOINT = "https://api.twitter.com/1.1/search/tweets.json?q={query}";
 
-    public Feed getLastTwoWeeksFeed() {
-
+    private Feed getLastTwoWeeksFeed(String query) {
         OAuthRestTemplate restTemplate = new OAuthRestTemplate(new TwitterOAuth());
-        Feed feed = restTemplate.getForObject(SEARCH_ENDPOINT, Feed.class, URLEncoder.encode(SEARCH_ALL_CRITERIA));
-
-        return feed;
+        return restTemplate.getForObject(SEARCH_ENDPOINT, Feed.class, URLEncoder.encode(query) + " since:" + twoWeeksAgo());
     }
 
+    public Feed getPayByPhoneUkLastTwoWeeksFeed() {
+        return this.getLastTwoWeeksFeed("from:PayByPhone_UK");
+    }
 
+    public Feed getPayByPhoneLastTwoWeeksFeed() {
+        return this.getLastTwoWeeksFeed("from:PayByPhone");
+    }
 
+    public Feed getPay_By_PhoneUkLastTwoWeeksFeed() {
+        return this.getLastTwoWeeksFeed("from:pay_by_phone");
+    }
+
+    // Helper method
     private String twoWeeksAgo() {
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.DATE, -14);
