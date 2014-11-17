@@ -88,6 +88,26 @@ public class TweetAggregatorTest {
 
     }
 
+    @Test
+    public void shouldContain3UserMentions(){
+
+        Feed a = buildFeed("User A", "I am @PayByPhone and I mentioning @matbhx! Hello!");
+        Feed b = buildFeed("User B", "I'm not mentioning anyone, but here's my e-mail lol@cats.com");
+        Feed c = buildFeed("User C", "Greetings to new @PayByPhone_UK followers: @parkMyCar and @parkMySpaceship!");
+
+        PayByPhoneTweetAggregator aggregator = new PayByPhoneTweetAggregator();
+        List<AggregatedTweet> output = aggregator.mergeInformation(a, b, c);
+
+        int mentions = 0;
+
+        mentions += output.get(0).getNumberOfUserMentions();
+        mentions += output.get(1).getNumberOfUserMentions();
+        mentions += output.get(2).getNumberOfUserMentions();
+
+        assertEquals(mentions, 3);
+
+    }
+
     // Builds a mock Feed (JSON) object
     private Feed buildFeed(String name, String... texts) {
 
